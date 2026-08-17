@@ -20,7 +20,7 @@ if ($Mode -eq "failure") {
     $commits = git log --pretty=format:"%h %s" 2>&1
     $content = @("# Commit Summary", "") + @($commits)
     Set-Content -Path $summaryFile -Value $content
-    $result = "summary.md written with $((@($commits)).Count) commit(s)"
+    $result = "commit-summary.md written on branch '$branch' with $((@($commits)).Count) commit(s)"
 }
 
 # Write the full transcript (the truth).

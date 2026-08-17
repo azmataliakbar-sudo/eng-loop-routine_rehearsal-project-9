@@ -85,3 +85,19 @@ Popup appears and stays open until you click OK.
 The status column says GREEN in both cases. Only the transcript shows the real result.
 
 Green means the session ended without an infrastructure error, nothing more.
+
+---
+
+## All Loop Engineering Projects
+
+| # | Project | Repo |
+|---|---|---|
+| 1 | A Watch Loop | `eng-loop-a_watch_loop` |
+| 2 | Make the tests pass, then stop | `eng-loop-pass_stop` |
+| 3 | The morning brief with a memory | `eng-loop-morning_brief` |
+| 4 | A fix loop with a real checker | `eng-loop-fix_loop` |
+| 5 | Codify the body | `eng-loop-fix_loop5` |
+| 6 | The doorbell loop | `doorbell-loop` |
+| 7 | Break it on purpose | `eng-loop-break_it` |
+| 8 | Your own daily loop (capstone) | `eng-loop-daily_loop` |
+| 9 | Rehearse a routine for free | `eng-loop-routine_rehearsal` |

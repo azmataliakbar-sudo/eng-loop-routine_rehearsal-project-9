@@ -10,7 +10,6 @@ $startedAt = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
 
 # Actual task: summarize commits.
 if ($Mode -eq "failure") {
-    # Sabotage: read a file that does not exist, but catch the error.
     try {
         $null = Get-Content "does-not-exist.txt" -ErrorAction Stop
         $result = "unexpected: file existed"
@@ -64,12 +63,22 @@ $summaryLines = @(
 )
 Set-Content -Path "SUMMARY$nextSummary.md" -Value $summaryLines
 
-# Console output.
-Write-Output "===== Routine Rehearsal ====="
-Write-Output "Run: $nextSummary"
-Write-Output "Status column: GREEN (session completed)"
-Write-Output "Transcript truth:"
-Get-Content $transcriptFile | ForEach-Object { Write-Output "  $_" }
-Write-Output "Wrote task-done.txt -> DONE-$nextDone"
-Write-Output "Wrote SUMMARY$nextSummary.md"
-Write-Output "=============================="
+# Console output with color.
+Write-Host "===== Routine Rehearsal =====" -ForegroundColor DarkCyan
+Write-Host "Run: $nextSummary"
+Write-Host "Status column: GREEN (session completed)" -ForegroundColor Green
+
+if ($Mode -eq "failure") {
+    Write-Host "Mode: $Mode" -ForegroundColor Red
+    Write-Host "Result: $result" -ForegroundColor Red
+} else {
+    Write-Host "Mode: $Mode" -ForegroundColor Green
+    Write-Host "Result: $result" -ForegroundColor Green
+}
+
+Write-Host "Wrote task-done.txt -> DONE-$nextDone"
+Write-Host "Wrote SUMMARY$nextSummary.md"
+Write-Host "==============================" -ForegroundColor DarkCyan
+
+# Popup with exact transcript (the truth), stays open until closed.
+& "C:\Projects\eng_loop\routine_rehearsal\notify.ps1" -Title "Routine Result" -Message $transcript

@@ -5,6 +5,7 @@ param(
 
 $transcriptFile = "transcript.txt"
 $summaryFile = "commit-summary.md"
+$branch = "claude/summary"
 $startedAt = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
 
 # Actual task: summarize commits.

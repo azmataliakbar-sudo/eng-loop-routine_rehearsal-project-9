@@ -4,13 +4,18 @@ param(
 )
 
 $transcriptFile = "transcript.txt"
-$summaryFile = "summary.md"
+$summaryFile = "commit-summary.md"
 $startedAt = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
 
 # Actual task: summarize commits.
 if ($Mode -eq "failure") {
-    # Sabotage: read a file that does not exist.
-    $result = Get-Content "does-not-exist.txt" -ErrorAction Stop 2>&1
+    # Sabotage: read a file that does not exist, but catch the error.
+    try {
+        $null = Get-Content "does-not-exist.txt" -ErrorAction Stop
+        $result = "unexpected: file existed"
+    } catch {
+        $result = "FAILED: $($_.Exception.Message)"
+    }
 } else {
     $commits = git log --pretty=format:"%h %s" 2>&1
     $content = @("# Commit Summary", "") + @($commits)
